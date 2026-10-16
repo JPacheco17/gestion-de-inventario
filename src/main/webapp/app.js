@@ -19,7 +19,7 @@ async function peticion(ruta, metodo = "GET", datos) {
         opciones.headers = { "Content-Type": "application/json" };
         opciones.body = JSON.stringify(datos);
     }
-    const respuesta = await fetch("api/" + ruta, opciones);
+    const respuesta = await fetch("aplication/" + ruta, opciones);
     const texto = await respuesta.text();
     let resultado = null;
     try {
