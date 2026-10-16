@@ -1,13 +1,38 @@
 # Gestión de inventario
 
-Proyecto web base desarrollado con Java 17, Maven y Jakarta EE 11.
+Backend desarrollado con Java 21, Maven, Jersey, Hibernate/JPA y MariaDB/MySQL.
+La organización por capas sigue la arquitectura del proyecto Gestión Veterinaria.
+
+## Arquitectura
+
+```text
+config/         Configuración de Jakarta REST
+controller/     Endpoints REST
+dao/            Acceso a datos y GenericDAO
+dto/            Objetos enviados y recibidos como JSON
+model/entity/   Entidades JPA
+service/        Validaciones y lógica de negocio
+util/           Creación del EntityManager con JPAUtil
+```
+
+Por ahora se implementan las entidades Producto, Proveedor y Cliente.
 
 ## Requisitos
 
-- JDK 17
+- JDK 21
 - Maven 3.9 o superior
-- Apache NetBeans 30 (opcional)
-- Un servidor compatible con Jakarta EE 11
+- Apache Tomcat 11
+- MariaDB o MySQL
+
+## Base de datos
+
+Crear una base de datos llamada `gestion_inventario`. La conexión se configura en:
+
+```text
+src/main/resources/META-INF/persistence.xml
+```
+
+La configuración inicial usa el usuario `root` sin contraseña, como un XAMPP local típico.
 
 ## Compilar
 
@@ -15,19 +40,16 @@ Proyecto web base desarrollado con Java 17, Maven y Jakarta EE 11.
 mvn clean package
 ```
 
-El archivo WAR se genera en `target/gestion_inventario-1.0-SNAPSHOT.war`.
+El archivo generado es `target/gestion-inventario.war`.
 
-## Abrir en NetBeans
+## Endpoints
 
-1. Clona o descarga este repositorio.
-2. En NetBeans, selecciona **File > Open Project**.
-3. Abre la carpeta del proyecto.
-4. Configura un servidor compatible con Jakarta EE y ejecuta el proyecto.
-
-## Endpoint de prueba
-
-Después de desplegar la aplicación, el recurso REST de prueba queda disponible en:
+Después de desplegar en Tomcat:
 
 ```text
-/gestion_inventario/resources/jakartaee11
+/gestion-inventario/api/productos
+/gestion-inventario/api/proveedores
+/gestion-inventario/api/clientes
 ```
+
+Cada recurso cuenta con operaciones GET, POST, PUT y DELETE.
