@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gestión de pedidos</title>
+  <link rel="stylesheet" href="estilos.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <h1>Gestión de pedidos</h1>
+  <p>Pedidos, detalles e historial de entregas.</p>
+  <p id="mensaje" role="status" aria-live="polite"></p>
+  <button id="actualizar" type="button">Actualizar datos</button>
+
+  <section>
+    <h2>1. Crear pedido</h2>
+    <form id="form-pedido">
+      <label for="cliente">Cliente</label>
+      <select id="cliente" required><option value="">Seleccione un cliente</option></select>
+      <fieldset>
+        <legend>Productos del pedido</legend>
+        <label for="producto">Producto</label>
+        <select id="producto"><option value="">Seleccione un producto</option></select>
+        <label for="cantidad">Cantidad</label>
+        <input id="cantidad" type="number" min="1" step="1" value="1">
+        <button id="agregar" type="button">Agregar producto</button>
+        <table>
+          <thead><tr><th>Producto</th><th>Cantidad</th><th>Acción</th></tr></thead>
+          <tbody id="detalle-nuevo"></tbody>
+        </table>
+      </fieldset>
+      <button id="guardar" type="submit">Guardar pedido</button>
+    </form>
+  </section>
+
+  <section>
+    <h2>2. Consultar pedidos</h2>
+    <table>
+      <thead><tr><th>ID</th><th>Cliente</th><th>Fecha</th><th>Estado</th><th>Total</th><th>Acción</th></tr></thead>
+      <tbody id="pedidos"></tbody>
+    </table>
+    <h3 id="titulo-detalle">Detalle del pedido seleccionado</h3>
+    <table>
+      <thead><tr><th>Producto</th><th>Cantidad</th><th>Precio unitario</th><th>Subtotal</th></tr></thead>
+      <tbody id="detalle-consulta"></tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>3. Registrar entrega</h2>
+    <form id="form-entrega">
+      <label for="pedido-entrega">Pedido</label>
+      <select id="pedido-entrega" required><option value="">Seleccione un pedido</option></select>
+      <label for="fecha">Fecha</label>
+      <input id="fecha" type="date" required>
+      <label for="estado">Estado</label>
+      <select id="estado"><option value="EN_PROCESO">En proceso</option><option value="ENTREGADO">Entregado</option></select>
+      <button id="guardar-entrega" type="submit">Guardar entrega</button>
+    </form>
+    <h3>Historial del pedido seleccionado</h3>
+    <table>
+      <thead><tr><th>ID</th><th>Fecha</th><th>Estado</th></tr></thead>
+      <tbody id="historial"></tbody>
+    </table>
+  </section>
+</body>
+</html>

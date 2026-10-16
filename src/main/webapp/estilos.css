@@ -1,0 +1,11 @@
+body { font-family: Arial, sans-serif; max-width: 950px; margin: 24px auto; padding: 0 16px; color: #222; }
+section { border-top: 1px solid #aaa; margin-top: 24px; padding-top: 8px; }
+label { display: block; margin-top: 12px; }
+input, select, button { font: inherit; padding: 6px; max-width: 100%; }
+button { margin: 8px 0; cursor: pointer; }
+button:disabled { cursor: wait; }
+fieldset { margin: 16px 0; border: 1px solid #aaa; }
+table { width: 100%; border-collapse: collapse; margin: 12px 0; }
+th, td { text-align: left; border: 1px solid #aaa; padding: 7px; overflow-wrap: anywhere; }
+th { background: #eee; }
+#mensaje { min-height: 24px; font-weight: bold; }
