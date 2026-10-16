@@ -4,55 +4,21 @@
  */
 package edward.gestion_inventario.model.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import java.io.Serializable;
+import jakarta.persistence.*;
 
-/**
- *
- * @author Maios
- */
 @Entity
-public class Pedido implements Serializable {
+@Table(name = "pedidos")
+public class Pedido {
 
-    private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Pedido)) {
-            return false;
-        }
-        Pedido other = (Pedido) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "edward.gestion_inventario.model.entity.Pedido[ id=" + id + " ]";
-    }
-    
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_pedido")
+    public Long id;
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_cliente", nullable = false)
+    public Cliente cliente;
+    @Column(name = "fecha_pedido", nullable = false)
+    public java.time.LocalDate fechaPedido;
+    @Column(nullable = false, length = 20)
+    public String estado;
 }
