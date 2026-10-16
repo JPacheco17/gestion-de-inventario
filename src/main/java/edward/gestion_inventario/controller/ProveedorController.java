@@ -17,6 +17,7 @@ import java.util.Map;
 @Path("/proveedores")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
+/** Expone los endpoints REST para gestionar proveedores. */
 public class ProveedorController {
 
     private final ProveedorService proveedorService = new ProveedorService();

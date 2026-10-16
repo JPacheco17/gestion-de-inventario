@@ -17,15 +17,19 @@ import java.util.Map;
 @Path("/clientes")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
+//creación de los métodos rest para la plicación en clientes
+//ruta http://localhost:8080/gestion-inventario/api/clientes
 public class ClienteController {
 
     private final ClienteService clienteService = new ClienteService();
 
+    //lista todos los clentes de la base de datos
     @GET
     public Response listar() {
         return Response.ok(clienteService.listarTodos()).build();
     }
-
+    
+    //muestra el cliente ubicado por id
     @GET
     @Path("/{id}")
     public Response buscar(@PathParam("id") Long id) {
@@ -35,6 +39,7 @@ public class ClienteController {
                 : Response.ok(cliente).build();
     }
 
+    //crea un nuevo cliente
     @POST
     public Response crear(ClienteDTO clienteDTO) {
         try {
@@ -45,6 +50,7 @@ public class ClienteController {
         }
     }
 
+    //actualiza un cliente hallado por id
     @PUT
     @Path("/{id}")
     public Response actualizar(@PathParam("id") Long id,
@@ -56,7 +62,8 @@ public class ClienteController {
             return respuestaInvalida(ex);
         }
     }
-
+    
+    //elimina un ususairo hallado por id 
     @DELETE
     @Path("/{id}")
     public Response eliminar(@PathParam("id") Long id) {

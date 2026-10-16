@@ -5,6 +5,7 @@ import edward.gestion_inventario.dto.ProveedorDTO;
 import edward.gestion_inventario.model.entity.Proveedor;
 import java.util.List;
 
+/** Contiene la lógica de negocio y validaciones de proveedores. */
 public class ProveedorService {
 
     private final ProveedorDAO proveedorDAO;

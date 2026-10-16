@@ -2,6 +2,7 @@ package edward.gestion_inventario.dto;
 
 import java.math.BigDecimal;
 
+/** Transporta los datos de productos entre la API y el frontend. */
 public class ProductoDTO {
 
     private Long idProducto;

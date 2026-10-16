@@ -5,6 +5,7 @@ import edward.gestion_inventario.dto.ClienteDTO;
 import edward.gestion_inventario.model.entity.Cliente;
 import java.util.List;
 
+/** Contiene la lógica de negocio y validaciones de clientes. */
 public class ClienteService {
 
     private final ClienteDAO clienteDAO;

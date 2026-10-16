@@ -4,6 +4,7 @@ import edward.gestion_inventario.util.JPAUtil;
 import jakarta.persistence.EntityManager;
 import java.util.List;
 
+/** Contiene las operaciones CRUD reutilizables para todas las entidades. */
 public abstract class GenericDAO<T, ID> {
 
     protected final EntityManager entityManager;

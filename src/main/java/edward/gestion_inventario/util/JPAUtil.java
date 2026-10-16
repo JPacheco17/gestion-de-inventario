@@ -4,6 +4,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
+/** Crea los EntityManager usados para acceder a la base de datos. */
 public final class JPAUtil {
 
     private static final EntityManagerFactory ENTITY_MANAGER_FACTORY

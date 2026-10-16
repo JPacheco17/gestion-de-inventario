@@ -1,5 +1,6 @@
 package edward.gestion_inventario.dto;
 
+/** Transporta los datos de proveedores entre la API y el frontend. */
 public class ProveedorDTO {
 
     private Long idProveedor;

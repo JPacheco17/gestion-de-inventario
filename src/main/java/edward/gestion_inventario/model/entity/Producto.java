@@ -13,6 +13,7 @@ import java.math.BigDecimal;
 
 @Entity
 @Table(name = "productos")
+/** Representa la tabla productos de la base de datos. */
 public class Producto {
 
     @Id

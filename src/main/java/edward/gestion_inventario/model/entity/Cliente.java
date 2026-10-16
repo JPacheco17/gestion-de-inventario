@@ -9,6 +9,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "clientes")
+/** Representa la tabla clientes de la base de datos. */
 public class Cliente {
 
     @Id

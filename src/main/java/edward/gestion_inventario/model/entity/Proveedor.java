@@ -9,6 +9,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "proveedores")
+/** Representa la tabla proveedores de la base de datos. */
 public class Proveedor {
 
     @Id

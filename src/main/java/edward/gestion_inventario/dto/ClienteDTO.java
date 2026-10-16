@@ -1,5 +1,6 @@
 package edward.gestion_inventario.dto;
 
+/** Transporta los datos de clientes entre la API y el frontend. */
 public class ClienteDTO {
 
     private Long idCliente;

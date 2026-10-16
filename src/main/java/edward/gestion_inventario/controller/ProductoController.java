@@ -17,15 +17,19 @@ import java.util.Map;
 @Path("/productos")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
+//creación de los métodos rest para la plicación en clientes
+//ruta http://localhost:8080/gestion-inventario/api/clientes
 public class ProductoController {
 
     private final ProductoService productoService = new ProductoService();
 
+    //lista todos los productos de la base de datos
     @GET
     public Response listar() {
         return Response.ok(productoService.listarTodos()).build();
     }
 
+    //muestra el producto ubicado por id
     @GET
     @Path("/{id}")
     public Response buscar(@PathParam("id") Long id) {
@@ -35,6 +39,7 @@ public class ProductoController {
                 : Response.ok(producto).build();
     }
 
+    //crea un nuevo producto
     @POST
     public Response crear(ProductoDTO productoDTO) {
         try {
@@ -45,6 +50,7 @@ public class ProductoController {
         }
     }
 
+    //actualiza un producto hallado por id
     @PUT
     @Path("/{id}")
     public Response actualizar(@PathParam("id") Long id,
@@ -57,6 +63,7 @@ public class ProductoController {
         }
     }
 
+    //elimina un producto hallado por id
     @DELETE
     @Path("/{id}")
     public Response eliminar(@PathParam("id") Long id) {

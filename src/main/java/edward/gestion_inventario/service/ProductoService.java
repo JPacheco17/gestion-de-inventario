@@ -8,6 +8,7 @@ import edward.gestion_inventario.model.entity.Proveedor;
 import java.math.BigDecimal;
 import java.util.List;
 
+/** Contiene la lógica de negocio y validaciones de productos. */
 public class ProductoService {
 
     private final ProductoDAO productoDAO;
