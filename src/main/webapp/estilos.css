@@ -1,5 +1,7 @@
 body { font-family: Arial, sans-serif; max-width: 950px; margin: 24px auto; padding: 0 16px; color: #222; }
 section { border-top: 1px solid #aaa; margin-top: 24px; padding-top: 8px; }
+nav { margin: 16px 0; line-height: 2; }
+nav a { color: #0645ad; }
 label { display: block; margin-top: 12px; }
 input, select, button { font: inherit; padding: 6px; max-width: 100%; }
 button { margin: 8px 0; cursor: pointer; }

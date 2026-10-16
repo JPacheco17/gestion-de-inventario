@@ -10,11 +10,70 @@
 <body>
   <h1>Gestión de pedidos</h1>
   <p>Pedidos, detalles e historial de entregas.</p>
+  <nav>
+    <a href="#proveedor-seccion">Proveedores</a> |
+    <a href="#producto-seccion">Productos</a> |
+    <a href="#cliente-seccion">Clientes</a> |
+    <a href="#crear-pedido-seccion">Pedidos</a> |
+    <a href="#entregas-seccion">Entregas</a>
+  </nav>
   <p id="mensaje" role="status" aria-live="polite"></p>
   <button id="actualizar" type="button">Actualizar datos</button>
 
-  <section>
-    <h2>1. Crear pedido</h2>
+  <section id="proveedor-seccion">
+    <h2>1. Proveedores (administración del inventario)</h2>
+    <form id="form-proveedor">
+      <input name="idProveedor" type="hidden">
+      <label>Nombre <input name="nombre" required></label>
+      <label>Contacto <input name="contacto"></label>
+      <label>Teléfono <input name="telefono"></label>
+      <label>Correo <input name="email" type="email"></label>
+      <button type="submit">Guardar proveedor</button>
+      <button type="reset">Limpiar</button>
+    </form>
+    <table>
+      <thead><tr><th>ID</th><th>Nombre</th><th>Contacto</th><th>Teléfono</th><th>Correo</th><th>Acciones</th></tr></thead>
+      <tbody id="proveedores"></tbody>
+    </table>
+  </section>
+
+  <section id="producto-seccion">
+    <h2>2. Productos</h2>
+    <form id="form-producto">
+      <input name="idProducto" type="hidden">
+      <label>Nombre <input name="nombre" required></label>
+      <label>Descripción <input name="descripcion"></label>
+      <label>Precio <input name="precio" type="number" min="0" step="0.01" required></label>
+      <label>Stock <input name="stock" type="number" min="0" step="1" required></label>
+      <label>Proveedor <select name="idProveedor" required><option value="">Seleccione un proveedor</option></select></label>
+      <button type="submit">Guardar producto</button>
+      <button type="reset">Limpiar</button>
+    </form>
+    <table>
+      <thead><tr><th>ID</th><th>Nombre</th><th>Descripción</th><th>Precio</th><th>Stock</th><th>ID proveedor</th><th>Acciones</th></tr></thead>
+      <tbody id="catalogo-productos"></tbody>
+    </table>
+  </section>
+
+  <section id="cliente-seccion">
+    <h2>3. Clientes</h2>
+    <form id="form-cliente">
+      <input name="idCliente" type="hidden">
+      <label>Nombre <input name="nombre" required></label>
+      <label>Dirección <input name="direccion"></label>
+      <label>Teléfono <input name="telefono"></label>
+      <label>Correo <input name="email" type="email"></label>
+      <button type="submit">Guardar cliente</button>
+      <button type="reset">Limpiar</button>
+    </form>
+    <table>
+      <thead><tr><th>ID</th><th>Nombre</th><th>Dirección</th><th>Teléfono</th><th>Correo</th><th>Acciones</th></tr></thead>
+      <tbody id="catalogo-clientes"></tbody>
+    </table>
+  </section>
+
+  <section id="crear-pedido-seccion">
+    <h2>4. Crear pedido</h2>
     <form id="form-pedido">
       <label for="cliente">Cliente</label>
       <select id="cliente" required><option value="">Seleccione un cliente</option></select>
@@ -34,8 +93,8 @@
     </form>
   </section>
 
-  <section>
-    <h2>2. Consultar pedidos</h2>
+  <section id="entregas-seccion">
+    <h2>5. Consultar pedidos</h2>
     <table>
       <thead><tr><th>ID</th><th>Cliente</th><th>Fecha</th><th>Estado</th><th>Total</th><th>Acción</th></tr></thead>
       <tbody id="pedidos"></tbody>
@@ -48,7 +107,7 @@
   </section>
 
   <section>
-    <h2>3. Registrar entrega</h2>
+    <h2>6. Registrar entrega</h2>
     <form id="form-entrega">
       <label for="pedido-entrega">Pedido</label>
       <select id="pedido-entrega" required><option value="">Seleccione un pedido</option></select>

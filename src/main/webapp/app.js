@@ -1,6 +1,21 @@
 "use strict";
 
 let productos = [];
+const registros = { proveedores: [], clientes: [], productos: [] };
+const catalogos = {
+    proveedores: {
+        formulario: "form-proveedor", tabla: "proveedores", id: "idProveedor",
+        campos: ["nombre", "contacto", "telefono", "email"]
+    },
+    productos: {
+        formulario: "form-producto", tabla: "catalogo-productos", id: "idProducto",
+        campos: ["nombre", "descripcion", "precio", "stock", "idProveedor"]
+    },
+    clientes: {
+        formulario: "form-cliente", tabla: "catalogo-clientes", id: "idCliente",
+        campos: ["nombre", "direccion", "telefono", "email"]
+    }
+};
 let detalles = [];
 
 function elemento(id) {
@@ -48,10 +63,100 @@ function opcion(lista, valor, texto) {
     lista.add(new Option(texto, valor));
 }
 
+function mostrarCatalogo(tipo) {
+    const config = catalogos[tipo];
+    const tabla = elemento(config.tabla);
+    tabla.replaceChildren();
+    for (const registro of registros[tipo]) {
+        const fila = document.createElement("tr");
+        celda(fila, registro[config.id]);
+        for (const campo of config.campos) {
+            let valor = registro[campo];
+            if (campo === "precio") valor = dinero(valor);
+            if (tipo === "productos" && campo === "idProveedor") {
+                const proveedor = registros.proveedores.find(p => p.idProveedor === registro.idProveedor);
+                valor = proveedor ? proveedor.nombre : registro.idProveedor;
+            }
+            celda(fila, valor);
+        }
+        const acciones = celda(fila, "");
+        const editar = document.createElement("button");
+        editar.type = "button";
+        editar.textContent = "Editar";
+        editar.onclick = () => editarRegistro(tipo, registro);
+        acciones.appendChild(editar);
+        const eliminar = document.createElement("button");
+        eliminar.type = "button";
+        eliminar.textContent = "Eliminar";
+        eliminar.onclick = () => eliminarRegistro(tipo, registro[config.id]);
+        acciones.appendChild(eliminar);
+        tabla.appendChild(fila);
+    }
+}
+
+function editarRegistro(tipo, registro) {
+    const config = catalogos[tipo];
+    const formulario = elemento(config.formulario);
+    formulario.elements[config.id].value = registro[config.id];
+    for (const campo of config.campos) {
+        formulario.elements[campo].value = registro[campo] ?? "";
+    }
+    formulario.scrollIntoView({ behavior: "smooth", block: "center" });
+    informar("Modifique los datos y pulse Guardar para actualizar el registro.");
+}
+
+async function guardarRegistro(tipo, evento) {
+    evento.preventDefault();
+    const config = catalogos[tipo];
+    const formulario = elemento(config.formulario);
+    const id = formulario.elements[config.id].value;
+    const datos = {};
+    for (const campo of config.campos) {
+        const valor = formulario.elements[campo].value.trim();
+        datos[campo] = ["precio", "stock", "idProveedor"].includes(campo)
+            ? Number(valor) : valor;
+    }
+    try {
+        await peticion(id ? tipo + "/" + id : tipo,
+            id ? "PUT" : "POST", datos);
+        formulario.reset();
+        await cargarDatos();
+        informar((id ? "Registro actualizado." : "Registro creado.") + " " + tipo + ".");
+    } catch (error) {
+        informar(error.message, true);
+    }
+}
+
+async function eliminarRegistro(tipo, id) {
+    if (!confirm("¿Desea eliminar este registro?")) return;
+    try {
+        await peticion(tipo + "/" + id, "DELETE");
+        await cargarDatos();
+        informar("Registro eliminado.");
+    } catch (error) {
+        informar(error.message, true);
+    }
+}
+
 async function cargarDatos() {
     try {
-        const clientes = await peticion("clientes");
-        productos = await peticion("productos");
+        const [proveedores, clientes, listaProductos] = await Promise.all([
+            peticion("proveedores"), peticion("clientes"), peticion("productos")
+        ]);
+        registros.proveedores = proveedores;
+        registros.clientes = clientes;
+        registros.productos = listaProductos;
+        productos = listaProductos;
+        for (const tipo of Object.keys(catalogos)) mostrarCatalogo(tipo);
+
+        const proveedorActual = elemento("form-producto").elements.idProveedor.value;
+        const proveedorSelect = elemento("form-producto").elements.idProveedor;
+        proveedorSelect.length = 1;
+        for (const proveedor of proveedores) {
+            opcion(proveedorSelect, proveedor.idProveedor, proveedor.nombre);
+        }
+        proveedorSelect.value = proveedorActual;
+
         const clienteActual = elemento("cliente").value;
         elemento("cliente").length = 1;
         for (const cliente of clientes) {
