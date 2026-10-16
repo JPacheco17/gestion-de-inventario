@@ -21,4 +21,16 @@ public class Pedido {
     public java.time.LocalDate fechaPedido;
     @Column(nullable = false, length = 20)
     public String estado;
+
+    public Long getIdPedido() { return id; }
+    public void setIdPedido(Long valor) { this.id = valor; }
+
+    public Cliente getCliente() { return cliente; }
+    public void setCliente(Cliente valor) { this.cliente = valor; }
+
+    public java.time.LocalDate getFechaPedido() { return fechaPedido; }
+    public void setFechaPedido(java.time.LocalDate valor) { this.fechaPedido = valor; }
+
+    public String getEstado() { return estado; }
+    public void setEstado(String valor) { this.estado = valor; }
 }
